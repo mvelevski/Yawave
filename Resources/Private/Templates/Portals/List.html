@@ -1,0 +1,48 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	  xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+	  data-namespace-typo3-fluid="true">
+<f:layout name="General" />
+<!--
+	=====================
+		Templates/News/List.html
+-->
+
+<f:section name="content">
+	<!--TYPO3SEARCH_end-->
+	<f:flashMessages />
+	<f:if condition="{news}">
+		<f:then>
+			<f:if condition="{settings.hidePagination}">
+				<f:then>
+					<f:for each="{news}" as="newsItem" iteration="iterator">
+						<f:render partial="List/Item" arguments="{newsItem: newsItem,settings:settings,iterator:iterator}" />
+					</f:for>
+				</f:then>
+				<f:else>
+					<n:widget.paginate objects="{news}" as="paginatedNews" configuration="{settings.list.paginate}" initial="{offset:settings.offset,limit:settings.limit,recordId:contentObjectData.uid}">
+						<f:for each="{paginatedNews}" as="newsItem" iteration="iterator">
+							<f:render partial="List/Item" arguments="{newsItem: newsItem,settings:settings,iterator:iterator}" />
+						</f:for>
+					</n:widget.paginate>
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			<div class="no-news-found">
+				<f:translate key="list_nonewsfound" />
+			</div>
+		</f:else>
+	</f:if>
+	<script>
+		(function (d, s, id) {
+			var js, yjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "https://app.<f:format.raw>{apiDomain}</f:format.raw>/sdk/init?lang=<f:format.raw>{currentlanguage}</f:format.raw>&appId=<f:format.raw>{appId}</f:format.raw>";
+			yjs.parentNode.insertBefore(js, yjs);
+		}(document, 'script', 'yawave-jssdk'));
+	</script>
+
+	<!--TYPO3SEARCH_begin-->
+</f:section>
+</html>

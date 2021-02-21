@@ -1,0 +1,21 @@
+plugin.tx_news{
+    view {
+        templateRootPath = EXT:yawave/Resources/Private/Templates/
+        partialRootPath = EXT:yawave/Resources/Private/Partials/
+        layoutRootPath = EXT:yawave/Resources/Private/Layouts/
+
+        twb {
+            templateRootPath = EXT:yawave/Resources/Private/Templates/Styles/Twb/Templates/
+            partialRootPath = EXT:yawave/Resources/Private/Templates/Styles/Twb/Partials/
+            layoutRootPath = EXT:yawave/Resources/Private/Templates/Styles/Twb/Layouts/
+        }
+    }
+    settings {
+        list {
+            paginate {
+                insertAbove = 0
+                insertBelow = 1
+            }
+        }
+    }
+}

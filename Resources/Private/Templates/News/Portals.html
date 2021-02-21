@@ -1,0 +1,44 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:layout name="General" />
+<!--
+	=====================
+		Templates/News/List.html
+-->
+
+<f:section name="content">
+    <!--TYPO3SEARCH_end-->
+    <f:flashMessages />
+    <f:if condition="{portals}">
+        <f:then>
+            <f:for each="{portals}" as="portalsItem" iteration="iterator">
+                <div class="portals-header col-lg-12 mb-4">
+                    <h4>{portalsItem.title}</h4>
+                    <f:link.page class="portals-header-button" pageUid="{settings.showAll}">Alle news</f:link.page>
+                </div>
+                <div class="row">
+                    <f:for each="{portalsItem.publications}" as="newsItem" iteration="iterator">
+                        <f:render partial="List/PortalItem" arguments="{siteDomain:'{siteDomain}',newsItem:newsItem,portalUid:'{portalsItem.uid}',releted:'{portalsItem.reletedContent}',settings:settings,iterator:iterator}" />
+                    </f:for>
+                </div>
+            </f:for>
+        </f:then>
+        <f:else>
+            <div class="no-news-found">
+                <f:translate key="list_nonewsfound" />
+            </div>
+        </f:else>
+    </f:if>
+    <script>
+        (function (d, s, id) {
+            var js, yjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://app.<f:format.raw>{apiDomain}</f:format.raw>/sdk/init?lang=<f:format.raw>{currentlanguage}</f:format.raw>&appId=<f:format.raw>{appId}</f:format.raw>";
+            yjs.parentNode.insertBefore(js, yjs);
+        }(document, 'script', 'yawave-jssdk'));
+    </script>
+    <!--TYPO3SEARCH_begin-->
+</f:section>
+</html>

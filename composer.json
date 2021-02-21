@@ -1,0 +1,24 @@
+{
+    "name": "yawave/yawave",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "authors": [
+        {
+            "name": "JustRaspberry",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "typo3/cms-core": "^10.4",
+        "georgringer/news": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yawave\\Yawave\\": "Classes"
+        }
+    },
+    "replace": {
+        "yawave/yawave": "self.version",
+        "typo3-ter/yawave": "self.version"
+    }
+}

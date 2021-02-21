@@ -1,0 +1,64 @@
+
+config{
+
+ no_cache = 1
+
+ tx_extbase {
+   persistence {
+     storagePid = 2
+     classes {
+
+       GeorgRinger\News\Domain\Model\News {
+         subclasses {
+           Tx_Yawave_Publications = Yawave\Yawave\Domain\Model\Publications
+
+         }
+       }
+       GeorgRinger\News\Domain\Model\Tag {
+         subclasses {
+           Tx_Yawave_Tag = Yawave\Yawave\Domain\Model\Tag
+
+         }
+       }
+       GeorgRinger\News\Domain\Model\Category {
+         subclasses {
+           Tx_Yawave_Category = Yawave\Yawave\Domain\Model\Category
+
+         }
+       }
+       Yawave\Yawave\Domain\Model\Publications {
+         mapping {
+           tableName = tx_news_domain_model_news
+           recordType = Tx_Yawave_Publications
+         }
+       }
+
+       Yawave\Yawave\Domain\Model\Tag {
+         mapping {
+           tableName = tx_news_domain_model_tag
+           recordType = Tx_Yawave_Tag
+         }
+       }
+
+       Yawave\Yawave\Domain\Model\Category {
+         mapping {
+           tableName = sys_category
+           recordType = Tx_Yawave_Category
+         }
+       }
+
+     }
+   }
+   objects {
+     GeorgRinger\News\Domain\Repository\TagRepository {
+         className = Yawave\Yawave\Domain\Repository\TagRepository
+     }
+     GeorgRinger\News\Domain\Repository\CategoryRepository {
+         className = Yawave\Yawave\Domain\Repository\CategoryRepository
+     }
+     GeorgRinger\News\Domain\Repository\NewsRepository {
+         className = Yawave\Yawave\Domain\Repository\PublicationsRepository
+     }
+   }
+ }
+}

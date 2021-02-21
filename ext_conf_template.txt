@@ -1,0 +1,17 @@
+# Yawave Configuration
+###########################
+# cat=settings/enable/1; type=string; label=LLL:EXT:yawave/Resources/Private/Language/locallang_be.xlf:TokenHook
+yawave.hooktoken =
+
+# cat=settings/enable/2; type=string; label=LLL:EXT:yawave/Resources/Private/Language/locallang_be.xlf:YawaveClientId
+yawave.clientId =
+
+# cat=settings/enable/3; type=string; label=LLL:EXT:yawave/Resources/Private/Language/locallang_be.xlf:YawaveSecret
+yawave.secret =
+
+
+# cat=settings/enable/4; type=options[sso.yawave.com=yawave.com,sso.test-yawave.com=test-yawave.com]; label=LLL:EXT:yawave/Resources/Private/Language/locallang_be.xlf:YawaveApiDomain
+yawave.apiDomain = unique
+
+# cat=settings/enable/5; type=string; label=LLL:EXT:yawave/Resources/Private/Language/locallang_be.xlf:YawaveLinkId
+yawave.LinkId =

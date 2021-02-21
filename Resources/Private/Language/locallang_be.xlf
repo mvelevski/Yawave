@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-06-02T11:47:18Z" product-name="news">
+		<header/>
+		<body>
+			<trans-unit id="YawaveClientId">
+                <source>App Id: where can i find the app id and the app secret? first you need to add a typo3 connection to your yawave account: Integrate -> Connections -> Add Connection After creation you can find app id and app secret in this new connection."</source>
+            </trans-unit>
+            <trans-unit id="YawaveSecret">
+                <source>Yawave Secret (App Secret)</source>
+            </trans-unit>
+            <trans-unit id="TokenHook">
+                <source>Hook Token (API key)</source>
+            </trans-unit>
+            <trans-unit id="YawaveApiDomain" xml:space="preserve">
+                <source>Select Api Domain. You can choose between development and a live environment</source>
+            </trans-unit>
+            <trans-unit id="YawaveLinkId" xml:space="preserve">
+                <source>Application Id: Where can i find the yawave application id? in your yawave-account you can find in the top-navigation an icon with 9 little boxes. click on it and choose the yawave application you wanna have the application id for. now you can mouseover the three dots and click on "copy yawave application id</source>
+            </trans-unit>
+            <trans-unit id="flexforms_general.mode.news_selectedlistYawave" xml:space="preserve">
+                <source>List Portals</source>
+            </trans-unit>
+            <trans-unit id="flexforms_general.portals" xml:space="preserve">
+                <source>Select Portals</source>
+            </trans-unit>
+            <trans-unit id="flexforms_additional.showAll">
+                <source>Show All page Id</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

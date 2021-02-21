@@ -1,0 +1,198 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	  xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+	  xmlns:rx="http://typo3.org/ns/Reelworx/RxShariff/ViewHelper"
+	  xmlns:video="http://typo3.org/ns/Yawave/Yawave/ViewHelpers"
+	  data-namespace-typo3-fluid="true">
+
+<f:layout name="Detail" />
+
+<!--
+	=====================
+		News/Detail.html
+-->
+
+<f:section name="content">
+	<f:if condition="{newsItem}">
+		<f:then>
+			<header class="masthead focuspoint">
+				<f:if condition="{newsItem.newsType} == 'VIDEO'">
+					<f:then>
+						<f:if condition="{newsItem.bodytext}">
+							<f:then>
+								<div class="bg-publication-video">
+									<div class="container">
+										<div style="position:relative;overflow:hidden;height:0;max-width:auto;padding-bottom:56.25%">
+											<f:format.htmlentitiesDecode>{newsItem.bodytext}</f:format.htmlentitiesDecode>
+										</div>
+									</div>
+								</div>
+							</f:then>
+							<f:else>
+								<div class="bg-publication-video">
+									<div class="container">
+										<div style="position:relative;overflow:hidden;height:0;max-width:auto;padding-bottom:56.25%">
+											<f:for each="{video:video(videoLink:newsItem.url)}" as="videolink">
+												<f:if condition="{videolink.baseUrl}=='youtube.com' || {videolink.baseUrl}=='www.youtube.com'">
+													<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" src="{videolink.link}?autoplay=1&mute=1" allowfullscreen="" scrolling="no" frameborder="0" allowtransparency="true">
+													</iframe>
+												</f:if>
+												<f:if condition="{videolink.baseUrl}=='vimeo.com'">
+													<iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none" src="//player.vimeo.com/video{videolink.link}" allowfullscreen="" scrolling="no" frameborder="0" allowtransparency="true">
+													</iframe>
+												</f:if>
+											</f:for>
+										</div>
+									</div>
+								</div>
+							</f:else>
+						</f:if>
+					</f:then>
+					<f:else>
+						<img src="{newsItem.header.image.0.url}">
+						<div class="layer">
+							<div class="yawave-header">
+								<div class="yawave-header-container row align-items-center">
+									<f:comment>
+										<f:format.htmlentitiesDecode>{newsItem.layout.header}</f:format.htmlentitiesDecode>
+									</f:comment>
+									<div id='yawave-header'>
+										<h1>{newsItem.header.title}</h1>
+										<h2>{newsItem.header.description}</h2>
+										<div id='yawave-buttons'>
+
+											<f:for each="{newsItem.tool}" as="button" iteration="iterator">
+
+												<f:if condition="{button.toolType}=='LINK'">
+													<f:for each="{button.reference}" as="reference">
+														<a class='btn btn-default' href='{reference.linkUrl}' target='_blank'>
+															<i class='fad icons8-upload_share'></i>{button.toolLabel}</a>
+														</a>
+													</f:for>
+												</f:if>
+												<f:if condition="{button.toolType}=='SHARE'">
+													<button class='btn btn-default' onclick='YawaveSDK.handleButtonClick(this)' data-yawave-type='button' data-yawave-tool='share' data-yawave-publication='{newsItem.yawavePublicationId}' data-yawave-id='{button.yawaveToolsId}' data-yawave-landing-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}" data-yawave-referral-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}">
+														<i class="fad icons8-upload_share"></i>{button.toolLabel}
+													</button>
+												</f:if>
+												<f:if condition="{button.toolType}=='FEEDBACK'">
+													<button class='btn btn-default' onclick='YawaveSDK.handleButtonClick(this)' data-yawave-type='button' data-yawave-tool='feedback'  data-yawave-publication='{newsItem.yawavePublicationId}' data-yawave-id='{button.yawaveToolsId}' data-yawave-landing-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}" data-yawave-referral-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}">
+														<i class="fad icons8-upload_share"></i>{button.toolLabel}
+													</button>
+												</f:if>
+												<f:if condition="{button.toolType}=='SUBSCRIBE'">
+													<button class='btn btn-default' onclick='YawaveSDK.handleButtonClick(this)' data-yawave-type='button' data-yawave-tool='subscribe' data-yawave-publication='{newsItem.yawavePublicationId}' data-yawave-id='{button.yawaveToolsId}' data-yawave-landing-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}" data-yawave-referral-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}">
+														<i class="fad icons8-upload_share"></i>{button.toolLabel}
+													</button>
+												</f:if>
+												<f:if condition="{button.toolType}=='FORM'">
+													<button class='btn btn-default' onclick='YawaveSDK.handleButtonClick(this)' data-yawave-type='button' data-yawave-tool='form' data-yawave-publication='{newsItem.yawavePublicationId}' data-yawave-id='{button.yawaveToolsId}' data-yawave-landing-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}" data-yawave-referral-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}">
+														<i class="fad icons8-upload_share"></i>{button.toolLabel}
+													</button>
+												</f:if>
+												<f:if condition="{button.toolType}=='PAYMENT'">
+													<button class='btn btn-default' onclick='YawaveSDK.handleButtonClick(this)' data-yawave-type='button'  data-yawave-tool='payment' data-yawave-publication='{newsItem.yawavePublicationId}' data-yawave-id='{button.yawaveToolsId}' >
+														<i class="fad icons8-upload_share"></i>{button.toolLabel}
+													</button>
+												</f:if>
+											</f:for>
+										</div>
+									</div>
+								</div>
+							</div>
+							<ul class="header-post-meta">
+								<li class="meta-item">
+									<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/views-icon.svg" />{newsItem.metric.views}
+								</li>
+								<li class="meta-item">
+									<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/user-icon.svg" />{newsItem.metric.recipients}
+								</li>
+								<li class="meta-item">
+									<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/activity-icon.svg" />{newsItem.metric.engagements}
+								</li>
+							</ul>
+						</div>
+					</f:else>
+				</f:if>
+
+			</header>
+			<div class="yawave-body-container">
+				<f:if condition="{newsItem.newsType} == 'LINK'">
+					<f:render partial="Detail/Link" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'VIDEO'">
+					<f:render partial="Detail/Video" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'PHOTO'">
+					<f:render partial="Detail/Photo" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'LANDING_PAGE'">
+					<f:render partial="Detail/LandingPage" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'NEWSLETTER'">
+					<f:render partial="Detail/Newsletter" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'EMBED_CODE'">
+					<f:render partial="Detail/EmbededCode" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'EMBED_PAGE'">
+					<f:render partial="Detail/EmbededPage" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'PDF'">
+					<f:render partial="Detail/Pdf" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+				<f:if condition="{newsItem.newsType} == 'ARTICLE'">
+					<f:render partial="Detail/Article" arguments="{newsItem:newsItem, settings:settings}" />
+				</f:if>
+			</div>
+		</f:then>
+	</f:if>
+	<div class="container">
+		<f:if condition="{portals}">
+			<f:then>
+				<div class="portals-header col-lg-12 mb-4">
+					<h4>SIMILAR NEWS</h4>
+					<f:link.page class="portals-header-button" pageUid="{settings.showAll}">Alle news</f:link.page>
+				</div>
+				<div class="row">
+					<f:for each="{portals}" as="portalsItem" iteration="iterator">
+						<f:for each="{portalsItem.reletedContent}" as="reletedContent" iteration="iterator">
+							<f:if condition="{reletedContent.title} == {newsItem.newsType}">
+								<f:for each="{portalsItem.publications}" as="publicationsNewsItem" iteration="iterator">
+									<f:if condition="{publicationsNewsItem.newsType} == {newsItem.newsType}">
+										<f:if condition="{newsItem.uid} !== {publicationsNewsItem.uid}">
+											<f:render partial="List/PortalItem" arguments="{newsItem:publicationsNewsItem,settings:settings,iterator:iterator}" />
+										</f:if>
+									</f:if>
+									<f:comment>
+										<f:if condition="{publicationsNewsItem.newsType} == {reletedContent.title}">
+											<f:if condition="{newsItem.uid} !== {publicationsNewsItem.uid}">
+												<f:render partial="List/PortalItem" arguments="{newsItem:publicationsNewsItem,settings:settings,iterator:iterator}" />
+											</f:if>
+										</f:if>
+									</f:comment>
+								</f:for>
+							</f:if>
+						</f:for>
+					</f:for>
+				</div>
+			</f:then>
+			<f:else>
+				<div class="no-news-found">
+					<f:translate key="list_nonewsfound" />
+				</div>
+			</f:else>
+		</f:if>
+	</div>
+
+	<script>
+		(function (d, s, id) {
+			var js, yjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "https://app.<f:format.raw>{apiDomain}</f:format.raw>/sdk/init?lang=<f:format.raw>{currentlanguage}</f:format.raw>&appId=<f:format.raw>{appId}</f:format.raw>";
+			yjs.parentNode.insertBefore(js, yjs);
+		}(document, 'script', 'yawave-jssdk'));
+	</script>
+
+</f:section>
+</html>

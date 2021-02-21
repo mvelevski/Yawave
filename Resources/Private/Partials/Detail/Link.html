@@ -1,0 +1,76 @@
+
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:y="http://typo3.org/ns/Yawave/Yawave/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{newsItem.metatag}">
+    <f:if condition="{newsItem.metatag.title}">
+        {v:page.header.title(title: '{newsItem.metatag.title}')}
+        {v:page.header.meta(property: 'og:title', content: '{newsItem.metatag.title}')}
+    </f:if>
+    <f:for each="{newsItem.metatag.images}" as="omgImage">
+        {v:page.header.meta(property: 'og:image', content: '{omgImage.url}')}
+    </f:for>
+    <f:if condition="{newsItem.metatag.description}">
+        {v:page.header.meta(name: 'dc.description', content: '{f:if(condition: newsItem.metatag.description, then: newsItem.metatag.description, else: metaDescription)}')}
+        {v:page.header.meta(property: 'og:description', content: '{f:if(condition: newsItem.metatag.description, then: newsItem.metatag.description, else: metaDescription)}')}
+    </f:if>
+</f:if>
+
+    <div class="container">
+        <div class="news-wraper">
+            <div class="header">
+                <h2 class="publication-title">{newsItem.title}</h2>
+            </div>
+            <div class="date-navigation col-lg-12 mt-3">
+                <div class="row">
+                    <time class="posts-date">
+                        <img class="icon mr-1" src="/typo3conf/ext/yawave/Resources/Public/Icons/post-type-link.svg">
+                    </time>
+                    <span class="news-list-date">
+                        <time itemprop="datePublished" datetime="{f:format.date(date:newsItem.starttime, format:'Y-m-d')}">
+                            <f:format.date format="%d. %B %Y -">{newsItem.starttime}</f:format.date>
+                        </time>
+                        <time itemprop="datePublished" datetime="{f:format.date(date:newsItem.starttime, format:'H:i')}">
+                            <f:format.date format="H:i">{newsItem.starttime}</f:format.date>
+                        </time>
+                    </span>
+                    <f:comment>
+                        <f:if condition="{newsItem.categories}">
+                            <f:render partial="Category/Items" arguments="{categories:newsItem.categories, settings:settings}" />
+                        </f:if>
+                    </f:comment>
+                    <f:if condition="{newsItem.tags}">
+                        <span class="news-list-tags" itemprop="keywords">
+                            <f:for each="{newsItem.tags}" as="tag">
+                                {tag.title}
+                            </f:for>
+                        </span>
+                    </f:if>
+                    <f:if condition="{newsItem.bodytext}">
+                        <f:then>
+                            <p>{newsItem.bodytext}</p>
+                        </f:then>
+                        <f:else>
+                            <p>{newsItem.teaser}</p>
+                        </f:else>
+                    </f:if>
+                    <f:if condition="{newsItem.author}">
+                        <span class="news-list-author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                            <f:translate key="author_simple" /> <span itemprop="name">{newsItem.author}</span>
+                        </span>
+                    </f:if>
+                    <f:if condition="{newsItem.url}">
+                        <a class="link" href="{newsItem.url}"><y:LinkYawave link="{newsItem.url}"/></a>
+                    </f:if>
+                </div>
+            </div>
+
+            <f:if condition="{settings.backPid}">
+                <div class="news-backlink-wrap">
+                    <f:link.page pageUid="{settings.backPid}">
+                        <f:translate key="back-link" />
+                    </f:link.page>
+                </div>
+            </f:if>
+        </div>
+    </div>
+</html>

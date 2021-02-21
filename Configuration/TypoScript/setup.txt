@@ -1,0 +1,73 @@
+plugin.tx_news{
+    settings {
+        list {
+            paginate {
+                insertAbove = 0
+                insertBelow = 1
+            }
+        }
+        language {
+            en = 0
+        }
+    }
+}
+
+yawaveHook = PAGE
+yawaveHook {
+    typeNum = 123456
+    10 = USER_INT
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = Yawave
+        pluginName = YawaveHook
+        vendorName = Yawave
+    }
+    config{
+        disableAllHeaderCode = 1
+        additionalHeaders {
+          10 {
+            header = Content-Type: application/json
+            replace = 1
+          }
+        }
+    }
+}
+
+
+ajaxContent = PAGE
+ajaxContent {
+    typeNum = 9999
+
+    # add plugin
+    10 < tt_content.list.20.yawave_yawavehook
+
+    # disable header code
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type: application/json, utf-8
+
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+    }
+}
+
+plugin.tx_yawave_yawave{
+    view {
+        templateRootPaths.0 = EXT:yawave/Resources/Private/Templates/
+        templateRootPaths.1 = {$plugin.tx_yawave_yawave.view.templateRootPath}
+        partialRootPaths.0 = EXT:yawave/Resources/Private/Partials/
+        partialRootPaths.1 = {$plugin.tx_yawave_yawave.view.partialRootPath}
+        layoutRootPaths.0 = EXT:yawave/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$plugin.tx_yawave_yawave.view.layoutRootPath}
+
+    }
+}
+page = PAGE
+page {
+    includeCSS {
+        yawaveCss = EXT:yawave/Resources/Public/css/yawave.css
+    }
+}
+
+plugin.tx_yawave.features.requireCHashArgumentForActionArguments = 0

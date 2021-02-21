@@ -1,0 +1,96 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	  xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+	  data-namespace-typo3-fluid="true">
+<!--
+	=====================
+		Partials/List/Item.html
+-->
+
+	<n:excludeDisplayedNews newsItem="{newsItem}"/>
+	<div class="post-grid-item col-lg-4 col-md-6 mb-4">
+		<div class="card h-100">
+			<f:if condition="{newsItem.cover}">
+				<div class="card-image">
+					<n:link newsItem="{newsItem}" settings="{settings}" title="{newsItem.title}">
+						<f:for each="{newsItem.cover.images}" as ="image">
+							<img class="card-img-top" src="{image.url}" alt="" style="height: auto;">
+						</f:for>
+						<f:if condition="{newsItem.newsType}==VIDEO">
+							<div class="video-news-icon">
+								<svg width="90" height="49" viewBox="0 0 90 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<rect x="1" y="1" width="88" height="47" rx="7" fill="#31404B" fill-opacity="0.5" stroke="white" stroke-width="2"></rect>
+									<path d="M39 15V33L54 24.0009L39 15Z" fill="white"></path>
+								</svg>
+							</div>
+						</f:if>
+					</n:link>
+				</div>
+			</f:if>
+			<div class="card-body">
+				<div class="share-button">
+					<f:for each="{newsItem.tool}" as="button" iteration="iterator">
+						<f:if condition="{button.toolType} == 'SHARE'">
+							<button class='btn btn-default' onclick='YawaveSDK.handleButtonClick(this)' data-yawave-type='button' data-yawave-tool='share' data-yawave-publication='{newsItem.yawavePublicationId}' data-yawave-id='{button.yawaveToolsId}' data-yawave-landing-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}" data-yawave-referral-url="{siteDomain}{f:uri.action(pageUid: settings.detailPid, action: 'detail', arguments: '{news: newsItem}')}"><i class="fad icons8-upload_share"></i>Share</button>
+						</f:if>
+					</f:for>
+				</div>
+				<div class="categories">
+					<f:for each="{newsItem.mainCategory}" as="maincategory">
+						<span class="main-category">{maincategory.title}</span>
+					</f:for>
+					<f:if condition="{f:count(subject: newsItem.maincategory)}!==0">
+						<span class="category-number"> + <f:count subject="{newsItem.maincategory}" /></span>
+					</f:if>
+				</div>
+				<div class="card-text">
+					<f:if condition="{newsItem.cover}">
+						<n:link newsItem="{newsItem}" settings="{settings}" title="{newsItem.title}">
+							<h4 class="card-title">{newsItem.cover.title}</h4>
+						</n:link>
+						<n:removeMediaTags>
+							<f:if condition="{newsItem.cover.description}">
+								<p class="card-text">{newsItem.cover.description -> f:format.crop(maxCharacters: '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}</p>
+							</f:if>
+						</n:removeMediaTags>
+					</f:if>
+				</div>
+				<div class="date">
+					<f:if condition="{newsItem.newsType}==ARTICLE">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-article.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==EMBED_PAGE">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-article.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==NEWSLETTER">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-newsletter.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==VIDEO">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-video.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==LANDING_PAGE">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-article.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==LINK">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-link.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==EMBED_CODE">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-embed_code.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==PDF">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-pdf.svg" />
+					</f:if>
+					<f:if condition="{newsItem.newsType}==PHOTO">
+						<img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/post-type-photo.svg" />
+					</f:if>
+					<f:format.date format="%d. %B %Y">{newsItem.starttime}</f:format.date>
+				</div>
+			</div>
+			<div class="card-footer">
+				<span><img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/views-icon.svg" />{newsItem.metric.views}</span>
+				<span><img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/user-icon.svg" />{newsItem.metric.recipients}</span>
+				<span><img class="icon mr-1" src="typo3conf/ext/yawave/Resources/Public/Icons/activity-icon.svg" />{newsItem.metric.engagements}</span>
+			</div>
+		</div>
+	</div>
+
+</html>
