@@ -1,6 +1,5 @@
 {
-    "name": "mvelevski/yawave",
-    "homepage": "https://github.com",
+    "name": "yawave/yawave",
     "type": "typo3-cms-extension",
     "description": "",
     "authors": [
@@ -9,6 +8,22 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://composer.typo3.org/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/mvelevski/yawave.git"
+        }
+    ],
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": "web"
+        }
+    },
     "require": {
         "typo3/cms-core": "^10.4",
         "georgringer/news": "^8.5"
