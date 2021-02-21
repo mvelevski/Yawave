@@ -1,5 +1,6 @@
 {
-    "name": "yawave/yawave",
+    "name": "mvelevski/yawave",
+    "homepage": "https://github.com",
     "type": "typo3-cms-extension",
     "description": "",
     "authors": [
