@@ -1,21 +1,13 @@
 {
     "name": "mvelevski/yawave",
     "type": "typo3-cms-extension",
+    "homepage": "https://github.com/mvelevski/yawave",
+    "license": "MIT",
     "description": "",
     "authors": [
         {
             "name": "JustRaspberry",
             "role": "Developer"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packagist.org/"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/mvelevski/yawave.git"
         }
     ],
     "extra": {
