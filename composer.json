@@ -11,7 +11,7 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://composer.typo3.org/"
+            "url": "https://packagist.org/"
         },
         {
             "type": "vcs",
