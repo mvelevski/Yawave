@@ -70,4 +70,4 @@ page {
     }
 }
 
-plugin.tx_yawave.features.requireCHashArgumentForActionArguments = 0
+plugin.tx_yawave_yawave.features.requireCHashArgumentForActionArguments = 0
