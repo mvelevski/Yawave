@@ -26,6 +26,11 @@
         "typo3/cms-core": "^10.4",
         "georgringer/news": "^8.5"
     },
+    "scripts": {
+        "post-autoload-dump": [
+            "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+        ]
+    },
     "autoload": {
         "psr-4": {
             "Yawave\\Yawave\\": "Classes"
