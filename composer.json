@@ -3,7 +3,13 @@
     "type": "typo3-cms-extension",
     "homepage": "https://github.com/mvelevski/yawave",
     "license": "MIT",
-    "description": "",
+    "description": "typo3 extension that extends the news extension and add record from the yawave",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "article",
+        "yawave"
+    ],
     "authors": [
         {
             "name": "JustRaspberry",
@@ -26,7 +32,6 @@
         }
     },
     "replace": {
-        "yawave/yawave": "self.version",
         "typo3-ter/yawave": "self.version"
     }
 }
