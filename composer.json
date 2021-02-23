@@ -26,7 +26,7 @@
         }
     },
     "replace": {
-        "mvelevski/yawave": "self.version",
+        "yawave/yawave": "self.version",
         "typo3-ter/yawave": "self.version"
     }
 }
