@@ -1,7 +1,7 @@
 {
     "name": "mvelevski/yawave",
     "type": "typo3-cms-extension",
-    "homepage": "https://github.com/mvelevski/yawave.git",
+    "homepage": "https://github.com/mvelevski/yawave",
     "license": "GPL-2.0-or-later",
     "description": "typo3 extension that extends the news extension and add record from the yawave",
     "keywords": [
